@@ -7,19 +7,26 @@ import Rate from "../components/Rate";
 import Tag from "../components/Tag";
 
 export default function FicheLogement() {
+  // Get the URL parameter 'id' using useParams() hook
   const params = useParams();
+  // Get the navigate() function to change the URL later on
   const navigate = useNavigate();
+  // Set the picked apartment data as state
   const [pickedAppart, setPickedAppart] = useState();
 
+  // Fetch data from the server using the 'id' URL parameter
   useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await fetch("/housing.json");
         const data = await res.json();
+        // Find the apartment with the same 'id' URL parameter
         const picked = data.find(({ id }) => id === params.id);
+        // If no apartment is found, go to the 404 page
         if (picked === undefined) {
           navigate("/404", { state: { message: "Can't get data" } });
         } else {
+          // Set the picked apartment data as state
           setPickedAppart(picked);
         }
       } catch (error) {
@@ -29,6 +36,7 @@ export default function FicheLogement() {
     fetchData();
   }, [params.id, navigate]);
 
+  // Render the picked apartment data if it exists
   return (
     pickedAppart && (
       <div key={params.id} className="fiche-container">
