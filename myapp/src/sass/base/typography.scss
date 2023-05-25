@@ -7,6 +7,9 @@
 
 body {
 	@include body-position;
+	display: flex;
+	justify-content: center;
+	width: auto;
 
 
 	@media (min-width: $breakpoint-desktop) {
@@ -17,7 +20,10 @@ body {
 
 main {
 	margin: 5%;
-
+	max-width: 1250px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 	@media screen and (min-width: $breakpoint-desktop) {
 		margin: 0 100px;
 	}
